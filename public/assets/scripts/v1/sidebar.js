@@ -12,8 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Primary UI class updating state routine
     function applySidebarState() {
         if (isOpened) {
-            // OPENED STATE: Show Sidebar, Logo, and reset left margins
+            // OPENED STATE: Show Sidebar, Logo, and reset structural sizes
             sidebar.classList.remove("-translate-x-full");
+            
+            // FIX: Restore sidebar visibility and width structural blocks on desktop viewports
+            sidebar.classList.remove("md:w-0", "md:opacity-0", "md:pointer-events-none");
+            sidebar.classList.add("w-64");
+
             headerLogo.classList.remove(
                 "w-0",
                 "opacity-0",
@@ -27,16 +32,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 "scale-x-100",
                 "mr-4",
             );
-            workspaceArea.classList.add("md:ml-64");
-            leftNavbar.classList.add("w-64", "px-4");
+            
+            if (leftNavbar) {
+                leftNavbar.classList.add("w-64", "px-4");
+            }
 
+            // Mobile specific backdrop toggle handling
             if (window.innerWidth < 768) {
                 backdrop.classList.remove("hidden");
-                setTimeout(() => backdrop.classList.add("opacity-100"), 10);
+                setTimeout(() => {
+                    // Check state insurance rule to make sure user didn't instantly re-toggle
+                    if (isOpened) backdrop.classList.add("opacity-100");
+                }, 10);
+            } else {
+                // Clear any leftover mobile backdrop states if screen is wide
+                backdrop.classList.remove("opacity-100");
+                backdrop.classList.add("hidden");
             }
         } else {
-            // CLOSED/COLLAPSED STATE: Hide Sidebar, Collapse Logo container, pull Burger to left:0
+            // CLOSED/COLLAPSED STATE: Hide Sidebar, Collapse Logo container
             sidebar.classList.add("-translate-x-full");
+            
+            // FIX: Set width to zero on desktop screens so workspace element captures full screen size
+            sidebar.classList.remove("w-64");
+            sidebar.classList.add("md:w-0", "md:opacity-0", "md:pointer-events-none");
+
             headerLogo.classList.remove(
                 "w-auto",
                 "opacity-100",
@@ -50,11 +70,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 "pointer-events-none",
                 "mr-0",
             );
-            workspaceArea.classList.remove("md:ml-64");
-            backdrop.classList.remove("opacity-100");
-            leftNavbar.classList.remove("w-64", "px-4");
+            
+            if (leftNavbar) {
+                leftNavbar.classList.remove("w-64", "px-4");
+            }
 
-            setTimeout(() => backdrop.classList.add("hidden"), 300);
+            // Animate mobile backdrop out cleanly
+            backdrop.classList.remove("opacity-100");
+            setTimeout(() => {
+                if (!isOpened) backdrop.classList.add("hidden");
+            }, 300);
         }
     }
 
@@ -65,26 +90,59 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Event Click Trigger Listeners
-    toggleBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        isOpened = !isOpened;
-        applySidebarState();
-    });
+    if (toggleBtn) {
+        toggleBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            isOpened = !isOpened;
+            applySidebarState();
+        });
+    }
 
     backdrop.addEventListener("click", function () {
         isOpened = false;
         applySidebarState();
     });
 
-    // Recalculate if user forces a viewport resize shift
+    // FIX: Recalculate and reset layouts completely when user scales/resizes display frames
     window.addEventListener("resize", function () {
-        if (
-            window.innerWidth >= 768 &&
-            !isOpened &&
-            !headerLogo.classList.contains("w-0")
-        ) {
-            isOpened = true;
-            applySidebarState();
+        const isDesktop = window.innerWidth >= 768;
+
+        if (isDesktop) {
+            // Automatically clear mobile overlay artifacts when scaling up to desktop layout systems
+            backdrop.classList.remove("opacity-100");
+            backdrop.classList.add("hidden");
+
+            // If it was hidden on desktop manually, keep it hidden but maintain correct width matrix rules
+            if (!isOpened) {
+                sidebar.classList.add("-translate-x-full", "md:w-0", "md:opacity-0", "md:pointer-events-none");
+                sidebar.classList.remove("w-64");
+            } else {
+                sidebar.classList.remove("-translate-x-full", "md:w-0", "md:opacity-0", "md:pointer-events-none");
+                sidebar.classList.add("w-64");
+            }
+        } else {
+            // FIX: When shrinking down to a mobile viewport size, force the tracking state 
+            // to false and reset sidebar tracking classes so it flies off-screen immediately.
+            isOpened = false; 
+            
+            // Clean up desktop width overriding classes
+            sidebar.classList.remove("md:w-0", "md:opacity-0", "md:pointer-events-none");
+            
+            // Ensure standard mobile hidden structural state styles are active
+            sidebar.classList.add("-translate-x-full");
+            sidebar.classList.remove("w-64");
+            
+            // Make sure backdrop hides instantly without any stuck opacity artifacts
+            backdrop.classList.remove("opacity-100");
+            backdrop.classList.add("hidden");
+            
+            // Clean up header logo state to match your mobile defaults
+            headerLogo.classList.remove("w-auto", "opacity-100", "scale-x-100", "mr-4");
+            headerLogo.classList.add("w-0", "opacity-0", "scale-x-0", "pointer-events-none", "mr-0");
+            
+            if (leftNavbar) {
+                leftNavbar.classList.remove("w-64", "px-4");
+            }
         }
     });
 });

@@ -17,23 +17,23 @@
 
     </div>
 
-    <div class="flex items-center gap-2 md:gap-4">
+    <div class="flex items-center gap-1 md:gap-4">
       <ul class="flex items-center gap-1 md:gap-3 m-0 p-0 list-none flex-row">
         
         <li class="inline-block relative">
           <a class="nav-link flex items-center justify-center p-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-full transition-colors dark-layout" href="javascript:void(0)">
-            <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+            <svg class="w-5 h-5 md:w-6 md:h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
             </svg>
           </a>
           <a class="nav-link hidden items-center justify-center p-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-full transition-colors light-layout" href="javascript:void(0)">
-            <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+            <svg class="w-5 h-5 md:w-6 md:h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M4.22 4.22l1.59 1.59m12.38 12.38l1.59 1.59M3 12h2.25m13.5 0H21M5.81 18.19l-1.59 1.59m14.38-14.38l-1.59 1.59M12 7.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9z" />
             </svg>
           </a>
         </li>
 
-        <li class="inline-block relative group">
+        <li class="hidden md:inline-block relative group">
           <a class="nav-link flex items-center justify-center p-2 hover:bg-gray-50 rounded-full transition-colors" href="javascript:void(0)" id="drop2">
             <img src="{{ asset('assets/images/svgs/icon-flag-en.svg') }}" alt="English" class="w-5 h-5 rounded-full object-cover" />
           </a>
@@ -51,20 +51,21 @@
 
         <li class="inline-block relative group">
           <a class="nav-link flex items-center justify-center p-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-full transition-colors relative" href="javascript:void(0)" id="drop1">
-            <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+            <svg class="w-5 h-5 md:w-6 md:h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
             </svg>
-            <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-blue-600 rounded-full"></span>
+            <span class="absolute top-2 right-2 w-2 h-2 bg-blue-600 rounded-full"></span>
           </a>
         </li>
 
         <li class="inline-block relative group">
           <a class="nav-link flex items-center justify-center p-1 hover:ring-2 hover:ring-blue-100 rounded-full transition-all" href="javascript:void(0)" id="drop3">
-            <div class="w-9 h-9 overflow-hidden rounded-full border border-gray-200 bg-gray-50">
+            <div class="w-8 h-8 md:w-9 md:h-9 overflow-hidden rounded-full border border-gray-200 bg-gray-50">
               <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="User Avatar" class="w-full h-full object-cover" />
             </div>
           </a>
-          <div class="hidden group-focus-within:block group-hover:block absolute right-0 mt-2 w-80 bg-white border border-gray-100 rounded-2xl shadow-xl z-50 p-6">
+          
+          <div class="hidden group-focus-within:block group-hover:block absolute right-0 mt-2 w-[calc(100vw-2rem)] sm:w-80 max-w-[320px] bg-white border border-gray-100 rounded-2xl shadow-xl z-50 p-4 md:p-6">
             <div class="flex items-center gap-4 pb-4 border-b border-gray-100">
               <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="Profile" class="w-12 h-12 rounded-full object-cover" />
               <div>

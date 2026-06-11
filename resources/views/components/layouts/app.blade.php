@@ -27,7 +27,7 @@
             
             <x-includes.sidebar />
 
-            <main id="workspaceArea" class="flex-1 min-w-0 bg-gray-50 p-6 transition-all duration-300 md:ml-64">
+            <main id="workspaceArea" class="flex-1 min-w-0 bg-gray-50 p-6 transition-all duration-300">
             {{ $slot }}
             </main>
         </div>
@@ -35,7 +35,7 @@
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif
-
+        @stack('scripts')
         <script src="{{ asset("assets/scripts/v1/sidebar.js") }}"></script>
     </body>
 </html>

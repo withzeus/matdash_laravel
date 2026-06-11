@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    //
+    public function theme()
+    {
+        return view("pages.settings.theme");
+    }
 }
