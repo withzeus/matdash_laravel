@@ -1,5 +1,5 @@
 <aside id="mainSidebar"
-  class="fixed top-[70px] bottom-0 left-0 flex w-64 z-50 flex-col border-r border-gray-100 bg-white shadow-xl transition-all duration-300 ease-in-out md:sticky md:shadow-none">
+  class="fixed top-[70px] bottom-0 left-0 flex w-64 z-50 flex-col border-r border-gray-100 bg-white shadow-xl transition-all duration-300 ease-in-out md:fixed md:shadow-none">
   
   <nav class="flex-1 overflow-y-auto p-4 space-y-6" data-simplebar>
     <div>
@@ -26,34 +26,32 @@
     </div>
 
     <div>
-  <p class="px-3 text-xxs font-bold text-gray-400 uppercase tracking-wider mb-2 text-[10px] flex items-center gap-2">
-    <span>Settings</span>
-  </p>
-  
-  <ul class="space-y-1">
-    <li>
-      <a href="{{ route("settings.theme") }}" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors {{ (request()->is('settings/theme')) ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
-        <svg class="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h11M19 7h2" />
-          <circle cx="16" cy="7" r="2" class="stroke-current" fill="currentColor" fill-opacity="0.2" stroke-width="1.5"/>
-          
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 17h3M11 17h10" />
-          <circle cx="8" cy="17" r="2" class="stroke-current" fill="currentColor" fill-opacity="0.2" stroke-width="1.5"/>
-        </svg>
-        <span>Theme</span>
-      </a>
-    </li>
-    <li>
-      <a href="./main/index2.html" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors {{ (request()->is('/') || request()->is('dashboard*')) ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
-        <svg class="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
-          <circle cx="12" cy="12" r="3" />
-          <circle cx="12" cy="12" r="8" stroke-dasharray="3 3" />
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2M12 20v2M2 12h2M20 12h2" />
-        </svg>
-        <span>Localization</span>
-      </a>
-    </li>
-  </ul>
-</div>
+      <p class="px-3 text-xxs font-bold text-gray-400 uppercase tracking-wider mb-2 text-[10px] flex items-center gap-2">
+        <span>Settings</span>
+      </p>
+      <ul class="space-y-1">
+        <li>
+          <a href="{{ route("settings.theme") }}" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors {{ (request()->is('settings/theme')) ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
+            <svg class="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 7h11M19 7h2" />
+              <circle cx="16" cy="7" r="2" class="stroke-current" fill="currentColor" fill-opacity="0.2" stroke-width="1.5"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 17h3M11 17h10" />
+              <circle cx="8" cy="17" r="2" class="stroke-current" fill="currentColor" fill-opacity="0.2" stroke-width="1.5"/>
+            </svg>
+            <span>Theme</span>
+          </a>
+        </li>
+        <li>
+          <a href="./main/index2.html" class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-xl transition-colors {{ (request()->is('/') || request()->is('dashboard*')) ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50' }}">
+            <svg class="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+              <circle cx="12" cy="12" r="3" />
+              <circle cx="12" cy="12" r="8" stroke-dasharray="3 3" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v2M12 20v2M2 12h2M20 12h2" />
+            </svg>
+            <span>Localization</span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </nav>
 </aside>

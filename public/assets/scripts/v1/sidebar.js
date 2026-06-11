@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // OPENED STATE: Show Sidebar, Logo, and reset structural sizes
             sidebar.classList.remove("-translate-x-full");
             
-            // FIX: Restore sidebar visibility and width structural blocks on desktop viewports
+            // Restore sidebar visibility and width structural blocks on desktop viewports
             sidebar.classList.remove("md:w-0", "md:opacity-0", "md:pointer-events-none");
             sidebar.classList.add("w-64");
 
@@ -32,6 +32,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 "scale-x-100",
                 "mr-4",
             );
+
+            workspaceArea.classList.add("md:ml-64");
             
             if (leftNavbar) {
                 leftNavbar.classList.add("w-64", "px-4");
@@ -53,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // CLOSED/COLLAPSED STATE: Hide Sidebar, Collapse Logo container
             sidebar.classList.add("-translate-x-full");
             
-            // FIX: Set width to zero on desktop screens so workspace element captures full screen size
+            // Set width to zero on desktop screens so workspace element captures full screen size
             sidebar.classList.remove("w-64");
             sidebar.classList.add("md:w-0", "md:opacity-0", "md:pointer-events-none");
 
@@ -70,6 +72,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 "pointer-events-none",
                 "mr-0",
             );
+
+            workspaceArea.classList.remove("md:ml-64");
             
             if (leftNavbar) {
                 leftNavbar.classList.remove("w-64", "px-4");
@@ -103,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
         applySidebarState();
     });
 
-    // FIX: Recalculate and reset layouts completely when user scales/resizes display frames
+    // Recalculate and reset layouts completely when user scales/resizes display frames
     window.addEventListener("resize", function () {
         const isDesktop = window.innerWidth >= 768;
 
@@ -112,16 +116,20 @@ document.addEventListener("DOMContentLoaded", function () {
             backdrop.classList.remove("opacity-100");
             backdrop.classList.add("hidden");
 
-            // If it was hidden on desktop manually, keep it hidden but maintain correct width matrix rules
+            // FIX: If transitioning from mobile to desktop, automatically force the tracking
+            // state back to open (true) so the layout opens natively on widescreen monitors.
             if (!isOpened) {
-                sidebar.classList.add("-translate-x-full", "md:w-0", "md:opacity-0", "md:pointer-events-none");
-                sidebar.classList.remove("w-64");
+                isOpened = true;
+                applySidebarState();
             } else {
+                // Insure classes are accurately maintained if already flagged true
                 sidebar.classList.remove("-translate-x-full", "md:w-0", "md:opacity-0", "md:pointer-events-none");
                 sidebar.classList.add("w-64");
+                workspaceArea.classList.add("md:ml-64");
+                if (leftNavbar) leftNavbar.classList.add("w-64", "px-4");
             }
         } else {
-            // FIX: When shrinking down to a mobile viewport size, force the tracking state 
+            // When shrinking down to a mobile viewport size, force the tracking state 
             // to false and reset sidebar tracking classes so it flies off-screen immediately.
             isOpened = false; 
             
@@ -131,6 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Ensure standard mobile hidden structural state styles are active
             sidebar.classList.add("-translate-x-full");
             sidebar.classList.remove("w-64");
+            workspaceArea.classList.remove("md:ml-64");
             
             // Make sure backdrop hides instantly without any stuck opacity artifacts
             backdrop.classList.remove("opacity-100");
