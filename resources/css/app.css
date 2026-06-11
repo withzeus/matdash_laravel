@@ -3,7 +3,45 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+@font-face {
+    font-family: pyidaungsu;
+    src: url("../fonts/pyi-daung-su/pyi-daung-su.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: pyidaungsu;
+    src: url("../fonts/pyi-daung-su/pyi-daung-su_Bold.ttf") format("truetype");
+    font-weight: bold;
+    font-size: normal;
+}
+
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    --font-default: 'pyidaungsu';
+
+      /* Colors */
+    --color-navbar: rgba(var(--bs-emphasis-color-rgb), 0.65);
+    --color-navbar-hover: rgba(var(--bs-emphasis-color-rgb), 0.8);
+    --color-navbar-active: rgba(var(--bs-emphasis-color-rgb), 1);
+
+    /* Font sizes */
+    --text-navbar-brand: 1.09375rem;
+
+    /* Radius */
+    --radius-navbar-toggler: 8px;
+
+    /* Spacing */
+    --spacing-navbar-brand-y: 0.3359375rem;
+    --spacing-navbar-link-x: 0.5rem;
+    --spacing-navbar-toggler-x: 0.75rem;
+    --spacing-navbar-toggler-y: 0.25rem;
+
+    --color-nav-link: var(--bs-nav-link-color);
+    --color-nav-link-hover: var(--bs-nav-link-hover-color);
+
+    --text-nav-link: var(--bs-nav-link-font-size);
 }
